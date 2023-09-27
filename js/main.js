@@ -1,3 +1,20 @@
+const secs = document.querySelectorAll('section');
+const btns = document.querySelectorAll('ul li');
+const speed = 500;
+let posArr = [];
+//로딩이 되자마자 스크롤 이동해야 되는 section의 세로 위치값을 배열에 저장
+secs.forEach((sec) => posArr.push(sec.offsetTop));
+
+//버튼을 반복돌면서 이벤트 연결
+btns.forEach((btn, idx) => {
+	//각 버튼 클릭시 클릭한 순번의 세로 섹션 배열 위치값으로 스크롤 모션 이동
+	btn.addEventListener('click', () => {
+		new Anime(window, { scroll: posArr[idx] }, { duration: speed });
+	});
+});
+
+//브라우저 스크롤시 현재 위치값이 특정순번의 섹션영역에 도달하면 해당 순번의 버튼 활성회
+
 function splitText(selector, interval = 0, delay = 0) {
 	let count = 0;
 	const txt = selector.innerText;
