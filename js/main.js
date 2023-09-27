@@ -14,6 +14,16 @@ btns.forEach((btn, idx) => {
 });
 
 //브라우저 스크롤시 현재 위치값이 특정순번의 섹션영역에 도달하면 해당 순번의 버튼 활성회
+window.addEventListener('scroll', () => {
+	const scroll = window.scrollY;
+
+	posArr.forEach((_pos, idx) => {
+		if (scroll >= posArr[idx]) {
+			btns.forEach((btn) => btn.classList.remove('on'));
+			btns[idx].classList.add('on');
+		}
+	});
+});
 
 function splitText(selector, interval = 0, delay = 0) {
 	let count = 0;
