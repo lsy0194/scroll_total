@@ -4,7 +4,7 @@ const speed = 500;
 let posArr = null;
 //처음 로딩시 1번 호출
 getPos();
-//브라우저가 resize 될때마다 호출해서 세로 위치값을갱신
+//브라우저가 resize   될때마다 호출해서 세로 위치값을갱신
 window.addEventListener('resize', () => {
 	getPos;
 });
@@ -19,9 +19,10 @@ btns.forEach((btn, idx) => {
 //브라우저 스크롤시 현재 위치값이 특정순번의 섹션영역에 도달하면 해당 순번의 버튼 활성회
 window.addEventListener('scroll', () => {
 	const scroll = window.scrollY;
+	const baseLine = -window.innerHeight / 3; //현재 보이는 섹션의 영역이 전체 영역의 3분의 2이상 보일떄 버튼 활성화
 
 	posArr.forEach((_, idx) => {
-		if (scroll >= posArr[idx]) {
+		if (scroll >= posArr[idx] + baseLine) {
 			btns.forEach((btn) => btn.classList.remove('on'));
 			btns[idx].classList.add('on');
 		}
