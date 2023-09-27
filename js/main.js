@@ -1,10 +1,13 @@
 const secs = document.querySelectorAll('section');
 const btns = document.querySelectorAll('ul li');
 const speed = 500;
-let posArr = [];
-//로딩이 되자마자 스크롤 이동해야 되는 section의 세로 위치값을 배열에 저장
-secs.forEach((sec) => posArr.push(sec.offsetTop));
-
+let posArr = null;
+//처음 로딩시 1번 호출
+getPos();
+//브라우저가 resize 될때마다 호출해서 세로 위치값을갱신
+window.addEventListener('resize', () => {
+	getPos;
+});
 //버튼을 반복돌면서 이벤트 연결
 btns.forEach((btn, idx) => {
 	//각 버튼 클릭시 클릭한 순번의 세로 섹션 배열 위치값으로 스크롤 모션 이동
@@ -17,13 +20,18 @@ btns.forEach((btn, idx) => {
 window.addEventListener('scroll', () => {
 	const scroll = window.scrollY;
 
-	posArr.forEach((_pos, idx) => {
+	posArr.forEach((_, idx) => {
 		if (scroll >= posArr[idx]) {
 			btns.forEach((btn) => btn.classList.remove('on'));
 			btns[idx].classList.add('on');
 		}
 	});
 });
+
+function getPos() {
+	posArr = [];
+	secs.forEach((sec) => posArr.push(sec.offsetTop));
+}
 
 function splitText(selector, interval = 0, delay = 0) {
 	let count = 0;
